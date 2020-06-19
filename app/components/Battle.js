@@ -34,6 +34,7 @@ function Instructions() {
 }
 
 class PlayerInput extends React.Component {
+	
 	constructor(props) {
 		super(props)
 
