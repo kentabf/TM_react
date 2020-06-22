@@ -24,7 +24,7 @@ module.exports = {
 			patterns: [{ 
 				from: '_redirects'
 			}]
-		}),
+		})
 	],
 	devServer: {
 		historyApiFallback: true
