@@ -39,35 +39,37 @@ function ReposGrid({ repos }) {
                 const { login, avatar_url } = owner
 
                 return (
-                    <Card
-                        header={`#${index + 1}`}
-                        avatar={avatar_url}
-                        href={html_url}
-                        name={login}
-                    >
-                        <ul className='card-list'>
-                            <li>
-                                <Tooltip text="Github username">
-                                    <FaUser color='rgb(255, 191, 116)' size={22} />
-                                    <a href={'https://github.com/${login}'}>
-                                        {login}
-                                    </a>
-                                </Tooltip>
-                            </li>
-                            <li>
-                                <FaStar color='rgb(255, 215, 9)' size={22} />
-                                {stargazers_count.toLocaleString()} stars
-                            </li>
-                            <li>
-                                <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
-                                {forks.toLocaleString()} forks
-                            </li>
-                            <li>
-                                <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
-                                {open_issues.toLocaleString()} open
-                            </li>
-                        </ul>
-                    </Card>
+                	<li key={html_url}>
+	                    <Card
+	                        header={`#${index + 1}`}
+	                        avatar={avatar_url}
+	                        href={html_url}
+	                        name={login}
+	                    >
+	                        <ul className='card-list'>
+	                            <li>
+	                                <Tooltip text="Github username">
+	                                    <FaUser color='rgb(255, 191, 116)' size={22} />
+	                                    <a href={'https://github.com/${login}'}>
+	                                        {login}
+	                                    </a>
+	                                </Tooltip>
+	                            </li>
+	                            <li>
+	                                <FaStar color='rgb(255, 215, 9)' size={22} />
+	                                {stargazers_count.toLocaleString()} stars
+	                            </li>
+	                            <li>
+	                                <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
+	                                {forks.toLocaleString()} forks
+	                            </li>
+	                            <li>
+	                                <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
+	                                {open_issues.toLocaleString()} open
+	                            </li>
+	                        </ul>
+	                    </Card>
+                    </li>
                 )
             })}
         
@@ -81,21 +83,16 @@ ReposGrid.propTypes = {
 
 
 export default class Popular extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			selectedLanguage: 'All',
-			repos: {},
-			error: null
-		}
-		this.updateLanguage = this.updateLanguage.bind(this)
-		this.isLoading = this.isLoading.bind(this)
+	state = {
+		selectedLanguage: 'All',
+		repos: {},
+		error: null
 	}
+
 	componentDidMount() {
 		this.updateLanguage(this.state.selectedLanguage)
 	}
-	updateLanguage(selectedLanguage) {
+	updateLanguage = (selectedLanguage) => {
 		this.setState({
 			selectedLanguage,
 			error: null,
@@ -119,7 +116,7 @@ export default class Popular extends React.Component {
 				})
 		}
 	}
-	isLoading() {
+	isLoading = () => {
 		const { selectedLanguage, repos, error } = this.state
 		return !repos[selectedLanguage] && error === null
 	}
